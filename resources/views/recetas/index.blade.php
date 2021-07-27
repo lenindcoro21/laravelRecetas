@@ -6,6 +6,8 @@
 
   @section('content')
   <h2 class="text-center mb-3">Administra tus Recetas</h2>
+
+    
   <div class="cold-md-10 mx-auto bg-white p-3">
     <table class="table">
     
@@ -21,12 +23,23 @@
           </thead>
 
           <tbody>
-              <tr>
-                  <td>Pizza de camarones</td>
-                  <td>Pizza</td>
-                  <td>------------------</td>
+
+           @foreach($userRecetas as $userReceta)
+
+               <tr>
+                  <td>{{$userReceta->nombre}}</td>
+                  <td>{{$userReceta->categoriaReceta->nombre}}</td>
+                  <td>
+                    <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success"> Ver </a>
+                    <a href="{{route('recetas.edit',['receta'=>$userReceta->id])}}" class="btn btn-dark"> Editar </a>
+                    <a href="" class="btn btn-danger"> Eliminar </a>
+                  
+                  </td>
               
               </tr>
+             
+           @endforeach
+             
           
           </tbody>
     
