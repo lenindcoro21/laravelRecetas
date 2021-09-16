@@ -28,9 +28,11 @@ class RecetaController extends Controller
      */
     public function index()
     {
+        // $usuario=Auth::user();
 
         $userRecetas=Auth::user()->userRecetas;
         return view('recetas.index')->with('userRecetas',$userRecetas);
+                                   //  ->with('usuario',$usuario);
     }
 
     /**
@@ -125,7 +127,8 @@ class RecetaController extends Controller
      */
     public function edit(Receta $receta)
     {
-        
+        //Verficacion de Policy
+        $this->authorize('view',$receta);
         $categorias=CategoriaReceta::all(['id','nombre']);
         return view('recetas.edit')->with('categorias',$categorias)
                                    ->with('receta', $receta);
@@ -141,7 +144,9 @@ class RecetaController extends Controller
     public function update(Request $request, Receta $receta)
     {
 
-        
+        //Verficacion de Policy
+        $this->authorize('update',$receta);
+
         $data=$request->validate([
 
             'nombre'=>'required|min:6',
@@ -165,7 +170,7 @@ class RecetaController extends Controller
                 //Despues aplicamos el estilo
                 $img=Image::make(public_path("storage/{$ruta_imagen}"))->fit(1000,550);
                 $img->save();
-                $receta->imagen=$ruta_imagen; 
+                $receta->imagen=$ruta_imagen ; 
 
             }
             // Guardar informacion
@@ -185,6 +190,12 @@ class RecetaController extends Controller
      */
     public function destroy(Receta $receta)
     {
-        //
+         //Verficacion de Policy
+         $this->authorize('delete',$receta);
+       // return "desde el elimar";
+
+        //Agregar Metodo Eliminar
+        $receta->delete();
+        return redirect()->action([RecetaController::class, 'index']);
     }
 }

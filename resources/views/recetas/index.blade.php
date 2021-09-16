@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
   @section('botones')
-    <a  class ="btn btn-primary " href="{{route("recetas.create")}}">Crear receta</a>
+    @include('ui.navegacion')
   @endsection  
-
+   
   @section('content')
   <h2 class="text-center mb-3">Administra tus Recetas</h2>
 
@@ -30,10 +30,11 @@
                   <td>{{$userReceta->nombre}}</td>
                   <td>{{$userReceta->categoriaReceta->nombre}}</td>
                   <td>
-                    <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success"> Ver </a>
-                    <a href="{{route('recetas.edit',['receta'=>$userReceta->id])}}" class="btn btn-dark"> Editar </a>
-                    <a href="" class="btn btn-danger"> Eliminar </a>
-                  
+                    <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success d-block"> Ver </a>
+                    <a href="{{route('recetas.edit',['receta'=>$userReceta->id])}}" class="btn btn-dark  d-block mt-1"> Editar </a>                    
+                    <eliminar-receta receta-id={{$userReceta->id}}></eliminar-receta>
+                    
+                    
                   </td>
               
               </tr>

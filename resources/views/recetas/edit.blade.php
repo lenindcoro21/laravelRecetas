@@ -9,7 +9,7 @@
  
 
  @section('botones')
-    <a  class ="btn btn-primary " href="{{route("recetas.index")}}">Volver a lista Receta</a>
+    @include('ui.listarecetas')
   @endsection  
 
 @section('content') 
@@ -69,7 +69,6 @@
                             <span class="invalid-feeback d-block" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>    
-
 
                         @enderror
 

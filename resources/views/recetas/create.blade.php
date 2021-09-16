@@ -9,7 +9,7 @@
  
 
  @section('botones')
-    <a  class ="btn btn-primary " href="{{route("recetas.index")}}">Volver a lista Receta</a>
+    @include('ui.listarecetas')
   @endsection  
 
 @section('content') 
