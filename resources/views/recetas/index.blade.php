@@ -35,6 +35,7 @@
                     <eliminar-receta receta-id={{$userReceta->id}}></eliminar-receta>
                     
                     
+                    
                   </td>
               
               </tr>
@@ -45,7 +46,30 @@
           </tbody>
     
     </table>
+    <div class="cold-12 mt-4 justify-content-center d-flex">
+    
+      {{$userRecetas->links()}}
+    </div>
+   {{--}} {{Auth::user()->ilike}} --}}
 
+    {{--{{$ilikes}} --}}
+    @if(count($iLikes)>0)
+          
+      <h2 class="text-center my-5">Recetas que te gustan</h2>
+      <div class="col-md-10 mx-auto bg-white p-3">
+            <ul class="list-group">
+                @foreach($iLikes as $recetaLike)
+                  <li class="list-group-item d-flex justify-center-between align-items-center">
+                    <p>{{$recetaLike->nombre}}</p>
+                    <a  class ="btn btn-dark " href="{{route('recetas.show',['receta'=>$recetaLike->id])}}">Ver</a>
+                  </li>
+                @endforeach
+            </ul>
+      </div>
+
+    @else
+      <p class="text-center my-5 font-weight-bold"> Aun no tienes Recetas que te gustan</p>
+    @endif
  </div>
  
 

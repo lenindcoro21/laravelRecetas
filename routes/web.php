@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RecetaController;
 
@@ -35,6 +36,9 @@ Route::delete('/recetas/{receta}', [RecetaController::class, "destroy"])->name("
 Route::get('/perfiles/{perfil}', [PerfilController::class, "show"])->name("perfiles.show");
 Route::get('/perfiles/{perfil}/edit', [PerfilController::class, "edit"])->name("perfiles.edit");
 Route::put('/perfiles/{perfil}', [PerfilController::class, "update"])->name("perfiles.update");
+
+//Likes Recetas 
+Route::post('/recetas/{receta}', [LikeController::class, "update"])->name("likes.update");
 
 Auth::routes();
 
